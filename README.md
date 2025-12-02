@@ -1,14 +1,28 @@
 # How to run locally
 
-- Add data
+## Step 1: Add the ten thousand json files to the /server/initial_data folder
+
+I didn't want to leak your data in a public git repository, so you have to add it manually.
 
 ## Step 2: Check you have recent Node and NPM versions
 
-`node -v` // v22.15.0
-`npm -v` // 10.9.2
+`node -v`
+`npm -v`
+
+I'm using v22.15.0 and v10.9.2, but it should work with any recent version.
+
+## Step 3: Install dependencies and run the server
 
 - npm i
-- npm run dev
-- url
+- npm start
+- url: http://localhost:3000/
 
 # Insights about the data
+
+# Improvements
+
+- Add HTTPS
+
+# Deliberate omissions
+
+- Authentication
