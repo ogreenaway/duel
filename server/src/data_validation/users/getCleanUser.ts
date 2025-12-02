@@ -6,7 +6,7 @@ import { getCleanName } from "./getCleanName";
 import { getCleanTiktokHandle } from "./getCleanTiktokHandle";
 
 export const getCleanUser = (
-  user: any
+  user: any,
 ): Omit<User, "_id" | "advocacy_programs"> => {
   return {
     legacy_user_id: user.user_id,

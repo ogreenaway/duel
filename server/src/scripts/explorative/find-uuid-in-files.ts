@@ -132,7 +132,7 @@ function searchInObject(obj: any, searchString: string): boolean {
   // Check if it's an object
   if (typeof obj === "object") {
     return Object.values(obj).some((value) =>
-      searchInObject(value, searchString)
+      searchInObject(value, searchString),
     );
   }
 

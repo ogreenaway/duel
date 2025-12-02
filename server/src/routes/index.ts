@@ -8,12 +8,14 @@ import userRoutes from "./userRoutes";
 
 const router = Router();
 
-// Mount route handlers
+// Basic GET routes
 router.use("/tasks", taskRoutes);
 router.use("/programs", programRoutes);
 router.use("/users", userRoutes);
-router.use("/mirror", mirrorRoutes);
+// Reporting routes
 router.use("/reports/users/top", topUsersReportRoutes);
 router.use("/reports/programs/top", topProgramReportRoutes);
+// Return the users in the format of the initial data
+router.use("/mirror", mirrorRoutes);
 
 export default router;

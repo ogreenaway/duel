@@ -19,7 +19,7 @@ const MAX_LIMIT = 100;
  */
 export async function getMirrorUsers(
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
 ): Promise<PaginatedMirrorUsers> {
   const db = mongoDb.getDb();
 

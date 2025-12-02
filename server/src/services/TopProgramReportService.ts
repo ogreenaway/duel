@@ -26,7 +26,7 @@ const MAX_LIMIT = 100;
  */
 export async function getTopProgramsBySales(
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
 ): Promise<PaginatedTopPrograms> {
   const db = mongoDb.getDb();
 

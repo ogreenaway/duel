@@ -79,7 +79,7 @@ async function analyzeProgramIds(): Promise<void> {
           result.filesFixed++;
         } catch (fixError) {
           console.error(
-            `❌ Failed to parse ${file}: ${(fixError as Error).message}`
+            `❌ Failed to parse ${file}: ${(fixError as Error).message}`,
           );
           result.filesWithErrors++;
           continue;
@@ -183,14 +183,14 @@ async function analyzeProgramIds(): Promise<void> {
     ([_, occurrences]) => {
       const uniqueFiles = new Set(occurrences.map((occ) => occ.fileName));
       return uniqueFiles.size > 1;
-    }
+    },
   ).length;
 
   console.log(
-    `\nProgram_ids with duplicates within same file: ${duplicateWithinFile}`
+    `\nProgram_ids with duplicates within same file: ${duplicateWithinFile}`,
   );
   console.log(
-    `Program_ids appearing in multiple files: ${duplicateAcrossFiles}`
+    `Program_ids appearing in multiple files: ${duplicateAcrossFiles}`,
   );
 
   // Show examples
@@ -221,7 +221,7 @@ async function analyzeProgramIds(): Promise<void> {
       console.log(`     Appears in ${example.files.length} files:`);
       example.files.slice(0, 5).forEach((file) => {
         const count = allOccurrences.filter(
-          (occ) => occ.fileName === file
+          (occ) => occ.fileName === file,
         ).length;
         console.log(`       - ${file} (${count} time${count > 1 ? "s" : ""})`);
       });

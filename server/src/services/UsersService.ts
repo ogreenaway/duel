@@ -16,7 +16,7 @@ export interface PaginatedUsers {
 
 export async function getAllUsers(
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
 ): Promise<PaginatedUsers> {
   const db = mongoDb.getDb();
 

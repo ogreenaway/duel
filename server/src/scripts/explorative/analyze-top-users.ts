@@ -81,7 +81,7 @@ async function analyzeTopUsers(): Promise<void> {
           filesFixed++;
         } catch (fixError) {
           console.error(
-            `❌ Failed to parse ${file}: ${(fixError as Error).message}`
+            `❌ Failed to parse ${file}: ${(fixError as Error).message}`,
           );
           filesWithErrors++;
           continue;
@@ -188,22 +188,22 @@ async function analyzeTopUsers(): Promise<void> {
   if (topSales.length > 0) {
     topSales.forEach((user, index) => {
       console.log(
-        `\n${index + 1}. ${user.name || "Unknown"} (${user.fileName})`
+        `\n${index + 1}. ${user.name || "Unknown"} (${user.fileName})`,
       );
       console.log(`   User ID: ${user.userId || "N/A"}`);
       console.log(`   Email: ${user.email || "N/A"}`);
       console.log(
         `   Total Sales: $${user.totalSalesAttributed.toLocaleString(
           undefined,
-          { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-        )}`
+          { minimumFractionDigits: 2, maximumFractionDigits: 2 },
+        )}`,
       );
       console.log(`   Total Likes: ${user.totalLikes.toLocaleString()}`);
       console.log(`   Total Reach: ${user.totalReach.toLocaleString()}`);
     });
   } else {
     console.log(
-      "\n⚠️  No users found with valid total_sales_attributed values"
+      "\n⚠️  No users found with valid total_sales_attributed values",
     );
   }
 
@@ -215,10 +215,10 @@ async function analyzeTopUsers(): Promise<void> {
   const totalReach = userStats.reduce((sum, user) => sum + user.totalReach, 0);
   const totalSales = userStats.reduce(
     (sum, user) => sum + user.totalSalesAttributed,
-    0
+    0,
   );
   const usersWithSales = userStats.filter(
-    (user) => user.totalSalesAttributed > 0
+    (user) => user.totalSalesAttributed > 0,
   ).length;
 
   console.log(`\nTotal Likes (all users): ${totalLikes.toLocaleString()}`);
@@ -227,10 +227,10 @@ async function analyzeTopUsers(): Promise<void> {
     `Total Sales (all users): $${totalSales.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    })}`
+    })}`,
   );
   console.log(
-    `Users with sales data: ${usersWithSales} out of ${userStats.length}`
+    `Users with sales data: ${usersWithSales} out of ${userStats.length}`,
   );
 
   console.log("\n" + "=".repeat(80));

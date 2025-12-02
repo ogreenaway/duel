@@ -56,7 +56,7 @@ async function checkDuplicateUserIds(): Promise<void> {
           filesFixed++;
         } catch (fixError) {
           console.error(
-            `❌ Failed to parse ${file}: ${(fixError as Error).message}`
+            `❌ Failed to parse ${file}: ${(fixError as Error).message}`,
           );
           filesWithErrors++;
           continue;
@@ -117,13 +117,13 @@ async function checkDuplicateUserIds(): Promise<void> {
   console.log(`Files ignored (null user_id): ${filesIgnored}`);
   console.log(`\nTotal unique user_ids: ${uniqueUserIds.length}`);
   console.log(
-    `User_ids with duplicates (appear in multiple files): ${duplicateUserIds.length}`
+    `User_ids with duplicates (appear in multiple files): ${duplicateUserIds.length}`,
   );
 
   // Calculate total files involved in duplicates
   const totalFilesInDuplicates = duplicateUserIds.reduce(
     (sum, dup) => sum + dup.files.length,
-    0
+    0,
   );
   console.log(`Total files involved in duplicates: ${totalFilesInDuplicates}`);
 
@@ -140,7 +140,7 @@ async function checkDuplicateUserIds(): Promise<void> {
       console.log(
         `\n${idx + 1}. User ID: "${dup.userId}" (appears in ${
           dup.files.length
-        } file(s))`
+        } file(s))`,
       );
       console.log(`   Files:`);
       dup.files.forEach((fileName, fileIdx) => {
@@ -163,7 +163,7 @@ async function checkDuplicateUserIds(): Promise<void> {
       .sort((a, b) => b[0] - a[0])
       .forEach(([fileCount, userIdCount]) => {
         console.log(
-          `  User_ids appearing in ${fileCount} file(s): ${userIdCount} user_id(s)`
+          `  User_ids appearing in ${fileCount} file(s): ${userIdCount} user_id(s)`,
         );
       });
   } else {

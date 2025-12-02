@@ -61,7 +61,7 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
           filesFixed++;
         } catch (fixError) {
           console.error(
-            `❌ Failed to parse ${file}: ${(fixError as Error).message}`
+            `❌ Failed to parse ${file}: ${(fixError as Error).message}`,
           );
           filesWithErrors++;
           continue;
@@ -79,7 +79,7 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
         });
       } else if (!Array.isArray(advocacyPrograms)) {
         console.warn(
-          `⚠️  ${file}: advocacy_programs is not an array (type: ${typeof advocacyPrograms})`
+          `⚠️  ${file}: advocacy_programs is not an array (type: ${typeof advocacyPrograms})`,
         );
         filesWithErrors++;
       } else {
@@ -123,14 +123,12 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
   console.log(`Files with JSON fixed: ${filesFixed}`);
   console.log(`Files with errors: ${filesWithErrors}`);
   console.log(`\nFiles with exactly 1 program: ${filesWithOneProgram}`);
+  console.log(`Files with 0 programs: ${filesWithZeroPrograms.length}`);
   console.log(
-    `Files with 0 programs: ${filesWithZeroPrograms.length}`
+    `Files with multiple programs (>1): ${filesWithMultiplePrograms.length}`,
   );
   console.log(
-    `Files with multiple programs (>1): ${filesWithMultiplePrograms.length}`
-  );
-  console.log(
-    `Files with missing advocacy_programs field: ${filesWithMissingField.length}`
+    `Files with missing advocacy_programs field: ${filesWithMissingField.length}`,
   );
 
   const filesNotEqualToOne =
@@ -139,7 +137,7 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
     filesWithMissingField.length;
 
   console.log(
-    `\n📌 Total files where advocacy_programs.length !== 1: ${filesNotEqualToOne}`
+    `\n📌 Total files where advocacy_programs.length !== 1: ${filesNotEqualToOne}`,
   );
 
   // Show examples
@@ -152,7 +150,7 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
     });
     if (filesWithZeroPrograms.length > 10) {
       console.log(
-        `  ... and ${filesWithZeroPrograms.length - 10} more file(s)`
+        `  ... and ${filesWithZeroPrograms.length - 10} more file(s)`,
       );
     }
   }
@@ -163,12 +161,12 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
     console.log("-".repeat(80));
     filesWithMultiplePrograms.slice(0, 10).forEach((file, idx) => {
       console.log(
-        `  ${idx + 1}. ${file.fileName} - ${file.programCount} program(s)`
+        `  ${idx + 1}. ${file.fileName} - ${file.programCount} program(s)`,
       );
     });
     if (filesWithMultiplePrograms.length > 10) {
       console.log(
-        `  ... and ${filesWithMultiplePrograms.length - 10} more file(s)`
+        `  ... and ${filesWithMultiplePrograms.length - 10} more file(s)`,
       );
     }
 
@@ -196,7 +194,7 @@ async function checkAdvocacyProgramsLength(): Promise<void> {
     });
     if (filesWithMissingField.length > 10) {
       console.log(
-        `  ... and ${filesWithMissingField.length - 10} more file(s)`
+        `  ... and ${filesWithMissingField.length - 10} more file(s)`,
       );
     }
   }
@@ -211,4 +209,3 @@ checkAdvocacyProgramsLength().catch((error) => {
   console.error("❌ Fatal error:", error);
   process.exit(1);
 });
-

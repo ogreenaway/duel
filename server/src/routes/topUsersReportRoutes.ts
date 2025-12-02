@@ -38,7 +38,7 @@ router.get("/", async (req: Request, res: Response) => {
     if (sortBy && !validSortBy.includes(sortBy)) {
       return res.status(400).json({
         error: `Invalid sortBy parameter. Must be one of: ${validSortBy.join(
-          ", "
+          ", ",
         )}`,
       });
     }
@@ -49,7 +49,7 @@ router.get("/", async (req: Request, res: Response) => {
       if (!validPlatforms.includes(platform)) {
         return res.status(400).json({
           error: `Invalid platform parameter. Must be one of: ${validPlatforms.join(
-            ", "
+            ", ",
           )}`,
         });
       }

@@ -7,7 +7,7 @@ import { getCleanReach } from "./getCleanReach";
 import { getCleanShares } from "./getCleanShares";
 
 export const getCleanTasksCompletes = (
-  task: any
+  task: any,
 ): Omit<Task, "_id" | "user_id" | "platform_id"> => {
   return {
     legacy_task_id: task.task_id,

@@ -35,7 +35,7 @@ const MAX_LIMIT = 100;
  * Get top users report based on various metrics
  */
 export async function getTopUsersReport(
-  params: TopUsersReportParams = {}
+  params: TopUsersReportParams = {},
 ): Promise<PaginatedTopUsersReport> {
   const db = mongoDb.getDb();
 

@@ -56,7 +56,7 @@ async function importData() {
         } catch (secondError) {
           console.error(
             `❌ Failed to parse ${file}:`,
-            (secondError as Error).message
+            (secondError as Error).message,
           );
           skipped++;
           continue;

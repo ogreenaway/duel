@@ -16,7 +16,7 @@ export interface PaginatedPrograms {
 
 export async function getAllPrograms(
   page: number = 1,
-  limit: number = 20
+  limit: number = 20,
 ): Promise<PaginatedPrograms> {
   const db = mongoDb.getDb();
 
