@@ -1,5 +1,5 @@
 # Initial data
-server/initial_data/*
+initial_data/*
 
 # Dependencies
 node_modules/
