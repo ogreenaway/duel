@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { User } from "../types/types";
+import { User } from "../models/UserModel";
 import mongoDb from "../repos/MongoDb";
 
 const MAX_LIMIT = 100;

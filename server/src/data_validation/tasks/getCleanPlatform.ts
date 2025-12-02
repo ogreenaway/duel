@@ -1,8 +1,12 @@
-import { Platform } from "../../types/types";
+import { Platform } from "../../models/UserModel";
 
 export const getCleanPlatform = (platform: unknown): Platform | null => {
-    if (platform === "TikTok" || platform === "Instagram" || platform === "Facebook") {
-        return platform;
-    }
-    return null;
+  if (
+    platform === "TikTok" ||
+    platform === "Instagram" ||
+    platform === "Facebook"
+  ) {
+    return platform;
+  }
+  return null;
 };

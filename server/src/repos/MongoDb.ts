@@ -1,7 +1,9 @@
 import { Collection, Db, MongoClient } from "mongodb";
-import { Program, Task, User } from "@src/types/types";
 
 import ENV from "@src/common/constants/ENV";
+import { Program } from "@src/models/ProgramModel";
+import { Task } from "@src/models/TaskModel";
+import { User } from "@src/models/UserModel";
 
 interface Database {
   tasks: Collection<Task>;
