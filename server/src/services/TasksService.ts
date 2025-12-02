@@ -1,7 +1,7 @@
 import { Filter, ObjectId } from "mongodb";
 
 import { Task } from "../models/TaskModel";
-import mongoDb from "../repos/MongoDb";
+import mongoDb from "../database/MongoDb";
 
 const MAX_LIMIT = 100;
 

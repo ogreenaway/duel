@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Program } from "../models/ProgramModel";
-import mongoDb from "../repos/MongoDb";
+import mongoDb from "../database/MongoDb";
 
 const MAX_LIMIT = 100;
 

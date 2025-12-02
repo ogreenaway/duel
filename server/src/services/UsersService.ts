@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { User } from "../models/UserModel";
-import mongoDb from "../repos/MongoDb";
+import mongoDb from "../database/MongoDb";
 
 const MAX_LIMIT = 100;
 
