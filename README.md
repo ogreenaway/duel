@@ -35,6 +35,7 @@ I didn't want to leak your data in a public git repository, so you have to add i
 - Add HTTPS
 - Add Prettier
 - Could add CRUD for tasks, programs, and users
+- Create API to return clean data (paginated)
 
 # Deliberate omissions
 
