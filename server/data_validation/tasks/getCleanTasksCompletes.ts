@@ -1,0 +1,1 @@
+// tasks_completed must exist and be an array. If so, then use the other validation functions to validate each task. If not, return an empty array

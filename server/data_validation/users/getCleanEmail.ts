@@ -1,0 +1,1 @@
+// Does a basic check to see if the email is valid. If so, return it. Otherwise, return null

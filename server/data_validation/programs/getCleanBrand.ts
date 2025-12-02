@@ -1,0 +1,1 @@
+// Must be a valid string. Otherwise return null

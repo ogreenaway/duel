@@ -1,0 +1,1 @@
+// advocacy_programs must exist and be an array. If so, then use the other validation functions to validate each advocacy program. If not, return an empty array
