@@ -5,36 +5,19 @@ import server from './server';
 import mongoDb from '@src/repos/MongoDb';
 
 
-/******************************************************************************
-                                Constants
-******************************************************************************/
-
-const SERVER_START_MSG = (
-  'Express server started on port: ' + ENV.Port.toString()
-);
-
-
-/******************************************************************************
-                                  Run
-******************************************************************************/
-
-// Connect to MongoDB and start the server
 (async () => {
   try {
-    // Initialize MongoDB connection
     await mongoDb.connect();
     logger.info('Connected to MongoDB');
 
-    // Start the server
-    server.listen(ENV.Port, err => {
-      if (!!err) {
-        logger.err(err.message);
+    server.listen(ENV.Port, error => {
+      if (!!error) {
+        logger.err(error.message);
       } else {
-        logger.info(SERVER_START_MSG);
+        logger.info( 'Express server started on port: ' + ENV.Port.toString());
       }
     });
 
-    // Handle graceful shutdown
     process.on('SIGINT', async () => {
       logger.info('Shutting down gracefully...');
       await mongoDb.close();
