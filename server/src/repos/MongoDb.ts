@@ -1,39 +1,17 @@
 import { Collection, Db, MongoClient } from "mongodb";
+import { Program, Task, User } from "@src/types/types";
 
 import ENV from "@src/common/constants/ENV";
-import { IUser } from "@src/models/User";
-import { NodeEnvs } from "@src/common/constants";
-import { Task } from "@src/types/types";
 
-/******************************************************************************
-                                Constants
-******************************************************************************/
-
-const DB_NAME = ENV.NodeEnv === NodeEnvs.Test ? "duel-test" : "duel";
-
-/******************************************************************************
-                                Types
-******************************************************************************/
-
-interface IDb {
-  users: Collection<IUser>;
+interface Database {
   tasks: Collection<Task>;
+  programs: Collection<Program>;
+  users: Collection<User>;
 }
-
-/******************************************************************************
-                                Variables
-******************************************************************************/
 
 let client: MongoClient;
 let db: Db;
 
-/******************************************************************************
-                                Functions
-******************************************************************************/
-
-/**
- * Connect to MongoDB
- */
 async function connect(): Promise<void> {
   if (client) {
     return; // Already connected
@@ -41,35 +19,26 @@ async function connect(): Promise<void> {
 
   client = new MongoClient(ENV.MongodbUri);
   await client.connect();
-  db = client.db(DB_NAME);
+  db = client.db("duel");
 }
 
-/**
- * Get the database instance
- */
-function getDb(): IDb {
+function getDb(): Database {
   if (!db) {
     throw new Error("Database not initialized. Call connect() first.");
   }
 
   return {
-    users: db.collection<IUser>("users"),
+    users: db.collection<User>("users"),
     tasks: db.collection<Task>("tasks"),
+    programs: db.collection<Program>("programs"),
   };
 }
 
-/**
- * Close the database connection
- */
 async function close(): Promise<void> {
   if (client) {
     await client.close();
   }
 }
-
-/******************************************************************************
-                                Export default
-******************************************************************************/
 
 export default {
   connect,

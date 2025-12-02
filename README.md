@@ -33,7 +33,7 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 - Add HTTPS
 - Add Prettier
-- Sort out IDs
+- Could add CRUD for tasks, programs, and users
 
 # Deliberate omissions
 
