@@ -16,12 +16,7 @@ const router = Router();
  * Query params:
  * - page: number (default: 1)
  * - limit: number (default: 20, max: 100)
- * - sortBy: 'likes' | 'comments' | 'shares' | 'conversion' | 'composite' (default: 'composite')
- * - likeWeight: number (default: 0.2)
- * - commentWeight: number (default: 0.2)
- * - shareWeight: number (default: 0.2)
- * - reachWeight: number (default: 0.4)
- * - conversionWeight: number (default: 0.3)
+ * - sortBy: 'likes' | 'comments' | 'shares' (default: 'likes')
  * - platform: 'TikTok' | 'Instagram' | 'Facebook' (optional)
  */
 router.get("/", async (req: Request, res: Response) => {
@@ -33,34 +28,13 @@ router.get("/", async (req: Request, res: Response) => {
     const limit = req.query.limit
       ? parseInt(req.query.limit as string)
       : undefined;
-    const sortBy = (req.query.sortBy as SortBy) || "composite";
-    const likeWeight = req.query.likeWeight
-      ? parseFloat(req.query.likeWeight as string)
-      : undefined;
-    const commentWeight = req.query.commentWeight
-      ? parseFloat(req.query.commentWeight as string)
-      : undefined;
-    const shareWeight = req.query.shareWeight
-      ? parseFloat(req.query.shareWeight as string)
-      : undefined;
-    const reachWeight = req.query.reachWeight
-      ? parseFloat(req.query.reachWeight as string)
-      : undefined;
-    const conversionWeight = req.query.conversionWeight
-      ? parseFloat(req.query.conversionWeight as string)
-      : undefined;
+    const sortBy = (req.query.sortBy as SortBy) || "likes";
     const platform = req.query.platform
       ? (req.query.platform as Platform)
       : undefined;
 
     // Validate sortBy
-    const validSortBy: SortBy[] = [
-      "likes",
-      "comments",
-      "shares",
-      "conversion",
-      "composite",
-    ];
+    const validSortBy: SortBy[] = ["likes", "comments", "shares"];
     if (sortBy && !validSortBy.includes(sortBy)) {
       return res.status(400).json({
         error: `Invalid sortBy parameter. Must be one of: ${validSortBy.join(
@@ -86,11 +60,6 @@ router.get("/", async (req: Request, res: Response) => {
       ...(page !== undefined && { page }),
       ...(limit !== undefined && { limit }),
       ...(sortBy && { sortBy }),
-      ...(likeWeight !== undefined && { likeWeight }),
-      ...(commentWeight !== undefined && { commentWeight }),
-      ...(shareWeight !== undefined && { shareWeight }),
-      ...(reachWeight !== undefined && { reachWeight }),
-      ...(conversionWeight !== undefined && { conversionWeight }),
       ...(platform && { platform }),
     };
 
