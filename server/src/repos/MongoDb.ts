@@ -1,20 +1,15 @@
-import { MongoClient, Db, Collection } from 'mongodb';
+import { Collection, Db, MongoClient } from "mongodb";
 
-import ENV from '@src/common/constants/ENV';
-import { NodeEnvs } from '@src/common/constants';
-import { IUser } from '@src/models/User';
-
+import ENV from "@src/common/constants/ENV";
+import { IUser } from "@src/models/User";
+import { NodeEnvs } from "@src/common/constants";
+import { Task } from "@src/types/types";
 
 /******************************************************************************
                                 Constants
 ******************************************************************************/
 
-const DB_NAME = (
-  ENV.NodeEnv === NodeEnvs.Test 
-    ? 'duel-test' 
-    : 'duel'
-);
-
+const DB_NAME = ENV.NodeEnv === NodeEnvs.Test ? "duel-test" : "duel";
 
 /******************************************************************************
                                 Types
@@ -22,8 +17,8 @@ const DB_NAME = (
 
 interface IDb {
   users: Collection<IUser>;
+  tasks: Collection<Task>;
 }
-
 
 /******************************************************************************
                                 Variables
@@ -31,7 +26,6 @@ interface IDb {
 
 let client: MongoClient;
 let db: Db;
-
 
 /******************************************************************************
                                 Functions
@@ -44,7 +38,7 @@ async function connect(): Promise<void> {
   if (client) {
     return; // Already connected
   }
-  
+
   client = new MongoClient(ENV.MongodbUri);
   await client.connect();
   db = client.db(DB_NAME);
@@ -55,11 +49,12 @@ async function connect(): Promise<void> {
  */
 function getDb(): IDb {
   if (!db) {
-    throw new Error('Database not initialized. Call connect() first.');
+    throw new Error("Database not initialized. Call connect() first.");
   }
-  
+
   return {
-    users: db.collection<IUser>('users'),
+    users: db.collection<IUser>("users"),
+    tasks: db.collection<Task>("tasks"),
   };
 }
 
@@ -71,7 +66,6 @@ async function close(): Promise<void> {
     await client.close();
   }
 }
-
 
 /******************************************************************************
                                 Export default
