@@ -56,10 +56,12 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 // });
 
 // Improvement: move to routes
-
-app.get("/tasks", async (_: Request, res: Response) => {
-  const tasks = await getAllTasks();
-  return res.json(tasks);
+// Improvement: make a function to get page and limit from request
+app.get("/tasks", async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const result = await getAllTasks(page, limit);
+  return res.json(result);
 });
 
 app.get("/tasks/:id", async (req: Request, res: Response) => {
@@ -67,9 +69,11 @@ app.get("/tasks/:id", async (req: Request, res: Response) => {
   return res.json(task);
 });
 
-app.get("/programs", async (_: Request, res: Response) => {
-  const programs = await getAllPrograms();
-  return res.json(programs);
+app.get("/programs", async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const result = await getAllPrograms(page, limit);
+  return res.json(result);
 });
 
 app.get("/programs/:id", async (req: Request, res: Response) => {
@@ -77,9 +81,11 @@ app.get("/programs/:id", async (req: Request, res: Response) => {
   return res.json(program);
 });
 
-app.get("/users", async (_: Request, res: Response) => {
-  const users = await getAllUsers();
-  return res.json(users);
+app.get("/users", async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const result = await getAllUsers(page, limit);
+  return res.json(result);
 });
 
 app.get("/users/:id", async (req: Request, res: Response) => {
