@@ -2,6 +2,9 @@ import { MongoClient } from 'mongodb';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { getCleanUser } from '../data_validation/users/getCleanUser';
+import { getValidJson } from '../data_validation/getValidJson';
+
 const MONGODB_URI = 'mongodb://localhost:27017/duel';
 const INITIAL_DATA_DIR = path.join(__dirname, '../../initial_data');
 const MAX_FILES = 100;
@@ -56,6 +59,8 @@ async function importData() {
           continue;
         }
       }
+
+      const user = getCleanUser(userData);
       
       // Extract user_id for relationships
       const userId = userData.user_id;
