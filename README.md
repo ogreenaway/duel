@@ -28,6 +28,7 @@ I didn't want to leak your data in a public git repository, so you have to add i
 # Insights about the data
 
 - Some JSON files were missing closing brackets
+- All the program_ids are unique so I can't group by them
 
 # Improvements
 
