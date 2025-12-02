@@ -15,6 +15,8 @@ async function importData() {
     
     const db = client.db('duel');
     const usersCollection = db.collection('users');
+    const programsCollection = db.collection('programs');
+    const tasksCollection = db.collection('tasks');
     
     // Get all JSON files
     const files = fs.readdirSync(INITIAL_DATA_DIR)
@@ -55,7 +57,38 @@ async function importData() {
         }
       }
       
+      // Extract user_id for relationships
+      const userId = userData.user_id;
+      
+      // Extract and remove advocacy_programs from user data
+      const advocacyPrograms = userData.advocacy_programs || [];
+      delete userData.advocacy_programs;
+      
+      // Insert user (without advocacy_programs)
       await usersCollection.insertOne(userData);
+      
+      // Insert programs and tasks
+      for (const program of advocacyPrograms) {
+        const programId = program.program_id;
+        
+        // Extract and remove tasks_completed from program
+        const tasksCompleted = program.tasks_completed || [];
+        delete program.tasks_completed;
+        
+        // Add user_id to program
+        program.user_id = userId;
+        
+        // Insert program (without tasks_completed, with user_id)
+        await programsCollection.insertOne(program);
+        
+        // Insert tasks with program_id and user_id
+        for (const task of tasksCompleted) {
+          task.program_id = programId;
+          task.user_id = userId;
+          await tasksCollection.insertOne(task);
+        }
+      }
+      
       imported++;
       
       if (imported % 10 === 0) {
