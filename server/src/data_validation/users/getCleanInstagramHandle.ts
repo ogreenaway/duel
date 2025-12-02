@@ -1,10 +1,23 @@
-/*
-The handle must be 30 characters or fewer
-Allowable characters: a-z A-Z 0-9 _ .
-Cannot have only numbers
-No "." starting or ending a username
-No two "." in sequence
-Cannot have only "." and "_" combinations as a username, even if you follow the two previous rules
-
-If it doesn't match, return null
-*/
+export const getCleanInstagramHandle = (handle: unknown): string | null => {
+    if (typeof handle !== 'string') return null;
+    
+    if (handle.length > 30) return null;
+    
+    // Allowable characters: a-z A-Z 0-9 _ .
+    const validCharsRegex = /^[a-zA-Z0-9_.]+$/;
+    if (!validCharsRegex.test(handle)) return null;
+    
+    // Cannot have only numbers
+    if (/^[0-9]+$/.test(handle)) return null;
+    
+    // No "." starting or ending a username
+    if (handle.startsWith('.') || handle.endsWith('.')) return null;
+    
+    // No two "." in sequence
+    if (handle.includes('..')) return null;
+    
+    // Cannot have only "." and "_" combinations
+    if (/^[._]+$/.test(handle)) return null;
+    
+    return handle;
+};

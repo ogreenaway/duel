@@ -1,1 +1,10 @@
-// Does a basic check to see if the email is valid. If so, return it. Otherwise, return null
+export const getCleanEmail = (email: unknown): string | null => {
+    if (typeof email !== 'string') return null;
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(email)) {
+        return email;
+    }
+    return null;
+};

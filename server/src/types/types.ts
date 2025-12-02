@@ -1,6 +1,8 @@
+export type Platform = "TikTok" | "Instagram" | "Facebook"
+
 export type Task = {
-    task_id: string | null,
-    platform: "TikTok" | "Instagram" | "Facebook" | null,
+    task_id: string,
+    platform: Platform | null,
     post_url: string | null,
     likes: number | null,
     comments: number | null,
@@ -9,7 +11,7 @@ export type Task = {
 }
 
 export type Program = {
-    program_id: string | null,
+    program_id: string,
     brand: string | null,
     total_sales_attributed: number | null,
     tasks_completed: Task[]

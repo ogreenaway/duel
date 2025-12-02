@@ -6,7 +6,7 @@ import { getCleanUser } from '../data_validation/users/getCleanUser';
 import { getValidJson } from '../data_validation/getValidJson';
 
 const MONGODB_URI = 'mongodb://localhost:27017/duel';
-const INITIAL_DATA_DIR = path.join(__dirname, '../../initial_data');
+const INITIAL_DATA_DIR = path.join(__dirname, '../../../initial_data');
 const MAX_FILES = 100;
 
 async function importData() {
@@ -63,34 +63,35 @@ async function importData() {
       const user = getCleanUser(userData);
       
       // Extract user_id for relationships
-      const userId = userData.user_id;
+      const userId = user.user_id;
       
-      // Extract and remove advocacy_programs from user data
-      const advocacyPrograms = userData.advocacy_programs || [];
-      delete userData.advocacy_programs;
+      // Extract advocacy_programs and user data for insertion
+      const { advocacy_programs: advocacyPrograms, ...userToInsert } = user;
       
       // Insert user (without advocacy_programs)
-      await usersCollection.insertOne(userData);
+      await usersCollection.insertOne(userToInsert);
       
       // Insert programs and tasks
       for (const program of advocacyPrograms) {
         const programId = program.program_id;
         
-        // Extract and remove tasks_completed from program
-        const tasksCompleted = program.tasks_completed || [];
-        delete program.tasks_completed;
+        // Extract tasks_completed and program data for insertion
+        // We need to cast to any or use a specific type because Program type has tasks_completed
+        const { tasks_completed: tasksCompleted, ...programData } = program;
         
-        // Add user_id to program
-        program.user_id = userId;
-        
-        // Insert program (without tasks_completed, with user_id)
-        await programsCollection.insertOne(program);
+        // Add user_id to program and insert
+        await programsCollection.insertOne({
+          ...programData,
+          user_id: userId
+        });
         
         // Insert tasks with program_id and user_id
         for (const task of tasksCompleted) {
-          task.program_id = programId;
-          task.user_id = userId;
-          await tasksCollection.insertOne(task);
+          await tasksCollection.insertOne({
+            ...task,
+            program_id: programId,
+            user_id: userId
+          });
         }
       }
       

@@ -1,1 +1,9 @@
-// Check it's a valid URL. If so, return it. Otherwise return null
+export const getCleanPostUrl = (url: unknown): string | null => {
+    if (typeof url !== 'string') return null;
+    try {
+        new URL(url);
+        return url;
+    } catch {
+        return null;
+    }
+};

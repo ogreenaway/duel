@@ -1,3 +1,6 @@
-/*
-Must be a valid positive integer. Otherwise return null
-*/
+export const getCleanReach = (reach: unknown): number | null => {
+    if (typeof reach === 'number' && Number.isInteger(reach) && reach >= 0) {
+        return reach;
+    }
+    return null;
+};

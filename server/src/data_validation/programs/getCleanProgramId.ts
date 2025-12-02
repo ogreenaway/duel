@@ -1,7 +1,8 @@
-/*
-Should be a uuid string but is often null.
+import { randomUUID } from 'crypto';
 
-If it's a string, check it's unique. If it's not unique, don't add it to the database and log it.
-
-If it isn't a string, create a uuid and add it to the database.
-*/
+export const getCleanProgramId = (programId: unknown): string => {
+    if (typeof programId === 'string' && programId.trim().length > 0) {
+        return programId;
+    }
+    return randomUUID();
+};

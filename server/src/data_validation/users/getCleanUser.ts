@@ -1,13 +1,20 @@
-import type { User } from "../../types/types";
+import { User } from "../../types/types";
+import { getCleanUserId } from "./getCleanUserId";
+import { getCleanName } from "./getCleanName";
+import { getCleanEmail } from "./getCleanEmail";
+import { getCleanInstagramHandle } from "./getCleanInstagramHandle";
+import { getCleanTiktokHandle } from "./getCleanTiktokHandle";
+import { getCleanJoinedAt } from "./getCleanJoinedAt";
+import { getCleanAdvocacyProgram } from "../programs/getCleanAdvocacyProgram";
 
-export const getCleanUser = (user: any):User => {
+export const getCleanUser = (user: any): User => {
     return {
-        user_id: user.user_id,
-        name: user.name,
-        email: user.email,
-        instagram_handle: user.instagram_handle,
-        tiktok_handle: user.tiktok_handle,
-        joined_at: user.joined_at,
-        advocacy_programs: user.advocacy_programs || []
-    }
-}
+        user_id: getCleanUserId(user.user_id),
+        name: getCleanName(user.name),
+        email: getCleanEmail(user.email),
+        instagram_handle: getCleanInstagramHandle(user.instagram_handle),
+        tiktok_handle: getCleanTiktokHandle(user.tiktok_handle),
+        joined_at: getCleanJoinedAt(user.joined_at),
+        advocacy_programs: getCleanAdvocacyProgram(user.advocacy_programs)
+    };
+};
