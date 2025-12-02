@@ -4,6 +4,8 @@ import * as path from 'path';
 
 import { getCleanUser } from '../data_validation/users/getCleanUser';
 import { getValidJson } from '../data_validation/getValidJson';
+import { getCleanAdvocacyProgram } from '../data_validation/programs/getCleanAdvocacyProgram';
+import { getCleanTasksCompletes } from '../data_validation/tasks/getCleanTask';
 
 const MONGODB_URI = 'mongodb://localhost:27017/duel';
 const INITIAL_DATA_DIR = path.join(__dirname, '../../../initial_data');
@@ -21,7 +23,6 @@ async function importData() {
     const programsCollection = db.collection('programs');
     const tasksCollection = db.collection('tasks');
     
-    // Get all JSON files
     const files = fs.readdirSync(INITIAL_DATA_DIR)
       .filter(file => file.endsWith('.json') && file.startsWith('user_'))
       .sort((a, b) => {
@@ -33,7 +34,6 @@ async function importData() {
     
     console.log(`Found ${files.length} files to import`);
     
-    // Import each file
     let imported = 0;
     let skipped = 0;
     
@@ -47,9 +47,8 @@ async function importData() {
       try {
         userData = JSON.parse(fileContent);
       } catch (firstError) {
-        // Second attempt: try to fix malformed JSON
+        // Second attempt: try to fix malformed JSON by adding closing brackets
         try {
-          const { getValidJson } = await import('../data_validation/getValidJson');
           const fixedJson = getValidJson(fileContent);
           userData = JSON.parse(fixedJson);
           console.log(`⚠️  Fixed malformed JSON in ${file}`);
@@ -61,36 +60,24 @@ async function importData() {
       }
 
       const user = getCleanUser(userData);
+      const {insertedId: user_id} = await usersCollection.insertOne(user);
+      const advocacyPrograms = userData.advocacy_programs || [];
       
-      // Extract user_id for relationships
-      const userId = user.user_id;
-      
-      // Extract advocacy_programs and user data for insertion
-      const { advocacy_programs: advocacyPrograms, ...userToInsert } = user;
-      
-      // Insert user (without advocacy_programs)
-      await usersCollection.insertOne(userToInsert);
-      
-      // Insert programs and tasks
-      for (const program of advocacyPrograms) {
-        const programId = program.program_id;
-        
-        // Extract tasks_completed and program data for insertion
-        // We need to cast to any or use a specific type because Program type has tasks_completed
-        const { tasks_completed: tasksCompleted, ...programData } = program;
-        
-        // Add user_id to program and insert
-        await programsCollection.insertOne({
-          ...programData,
-          user_id: userId
+      for (const programData of advocacyPrograms) {
+        const program = getCleanAdvocacyProgram(programData);
+
+        const {insertedId: program_id} = await programsCollection.insertOne({
+          ...program,
+          user_id: user_id
         });
         
-        // Insert tasks with program_id and user_id
-        for (const task of tasksCompleted) {
+        const tasksCompleted = programData.tasks_completed || [];
+        for (const taskData of tasksCompleted) {
+          const task = getCleanTasksCompletes(taskData);
           await tasksCollection.insertOne({
             ...task,
-            program_id: programId,
-            user_id: userId
+            program_id: program_id,
+            user_id: user_id
           });
         }
       }
