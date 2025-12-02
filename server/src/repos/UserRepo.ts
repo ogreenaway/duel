@@ -1,7 +1,7 @@
 import { IUser } from '@src/models/User';
 import { getRandomInt } from '@src/common/util/misc';
 
-import orm from './MockOrm';
+import mongoDb from './MongoDb';
 
 
 /******************************************************************************
@@ -12,75 +12,58 @@ import orm from './MockOrm';
  * Get one user.
  */
 async function getOne(email: string): Promise<IUser | null> {
-  const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.email === email) {
-      return user;
-    }
-  }
-  return null;
+  const db = mongoDb.getDb();
+  return db.users.findOne({ email });
 }
 
 /**
  * See if a user with the given id exists.
  */
 async function persists(id: number): Promise<boolean> {
-  const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.id === id) {
-      return true;
-    }
-  }
-  return false;
+  const db = mongoDb.getDb();
+  const user = await db.users.findOne({ id });
+  return !!user;
 }
 
 /**
  * Get all users.
  */
 async function getAll(): Promise<IUser[]> {
-  const db = await orm.openDb();
-  return db.users;
+  const db = mongoDb.getDb();
+  return db.users.find().toArray();
 }
 
 /**
  * Add one user.
  */
 async function add(user: IUser): Promise<void> {
-  const db = await orm.openDb();
+  const db = mongoDb.getDb();
   user.id = getRandomInt();
-  db.users.push(user);
-  return orm.saveDb(db);
+  await db.users.insertOne(user);
 }
 
 /**
  * Update a user.
  */
 async function update(user: IUser): Promise<void> {
-  const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === user.id) {
-      const dbUser = db.users[i];
-      db.users[i] = {
-        ...dbUser,
-        name: user.name,
-        email: user.email,
-      };
-      return orm.saveDb(db);
+  const db = mongoDb.getDb();
+  await db.users.updateOne(
+    { id: user.id },
+    { 
+      $set: { 
+        name: user.name, 
+        email: user.email 
+      } 
     }
-  }
+  );
 }
 
 /**
  * Delete one user.
  */
 async function delete_(id: number): Promise<void> {
-  const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === id) {
-      db.users.splice(i, 1);
-      return orm.saveDb(db);
-    }
-  }
+  const db = mongoDb.getDb();
+  await db.users.deleteOne({ id });
 }
 
 
@@ -90,26 +73,23 @@ async function delete_(id: number): Promise<void> {
  * Delete every user record.
  */
 async function deleteAllUsers(): Promise<void> {
-  const db = await orm.openDb();
-  db.users = [];
-  return orm.saveDb(db);
+  const db = mongoDb.getDb();
+  await db.users.deleteMany({});
 }
 
 /**
- * Insert multiple users. Can't do multiple at once cause using a plain file 
- * for now.
+ * Insert multiple users.
  */
 async function insertMult(
   users: IUser[] | readonly IUser[],
 ): Promise<IUser[]> {
-  const db = await orm.openDb(),
-    usersF = [ ...users ];
+  const db = mongoDb.getDb();
+  const usersF = [ ...users ];
   for (const user of usersF) {
     user.id = getRandomInt();
     user.created = new Date();
   }
-  db.users = [ ...db.users, ...users ];
-  await orm.saveDb(db);
+  await db.users.insertMany(usersF);
   return usersF;
 }
 
@@ -128,4 +108,3 @@ export default {
   deleteAllUsers,
   insertMult,
 } as const;
-

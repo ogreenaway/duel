@@ -1,4 +1,4 @@
-import jsonfile from 'jsonfile';
+import { MongoClient, Db, Collection } from 'mongodb';
 
 import ENV from '@src/common/constants/ENV';
 import { NodeEnvs } from '@src/common/constants';
@@ -9,10 +9,10 @@ import { IUser } from '@src/models/User';
                                 Constants
 ******************************************************************************/
 
-const DB_FILE_NAME = (
+const DB_NAME = (
   ENV.NodeEnv === NodeEnvs.Test 
-    ? 'database.test.json' 
-    : 'database.json'
+    ? 'duel-test' 
+    : 'duel'
 );
 
 
@@ -21,8 +21,16 @@ const DB_FILE_NAME = (
 ******************************************************************************/
 
 interface IDb {
-  users: IUser[];
+  users: Collection<IUser>;
 }
+
+
+/******************************************************************************
+                                Variables
+******************************************************************************/
+
+let client: MongoClient;
+let db: Db;
 
 
 /******************************************************************************
@@ -30,24 +38,38 @@ interface IDb {
 ******************************************************************************/
 
 /**
- * Fetch the json from the file.
+ * Connect to MongoDB
  */
-function openDb(): Promise<IDb> {
-  return jsonfile.readFile(__dirname + '/' + DB_FILE_NAME) as Promise<IDb>;
+async function connect(): Promise<void> {
+  if (client) {
+    return; // Already connected
+  }
+  
+  client = new MongoClient(ENV.MongodbUri);
+  await client.connect();
+  db = client.db(DB_NAME);
 }
 
 /**
- * Update the file.
+ * Get the database instance
  */
-function saveDb(db: IDb): Promise<void> {
-  return jsonfile.writeFile((__dirname + '/' + DB_FILE_NAME), db);
+function getDb(): IDb {
+  if (!db) {
+    throw new Error('Database not initialized. Call connect() first.');
+  }
+  
+  return {
+    users: db.collection<IUser>('users'),
+  };
 }
 
 /**
- * Empty the database
+ * Close the database connection
  */
-function cleanDb(): Promise<void> {
-  return jsonfile.writeFile((__dirname + '/' + DB_FILE_NAME), {});
+async function close(): Promise<void> {
+  if (client) {
+    await client.close();
+  }
 }
 
 
@@ -56,7 +78,7 @@ function cleanDb(): Promise<void> {
 ******************************************************************************/
 
 export default {
-  openDb,
-  saveDb,
-  cleanDb,
+  connect,
+  getDb,
+  close,
 } as const;

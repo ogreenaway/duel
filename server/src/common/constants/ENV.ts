@@ -11,6 +11,7 @@ import { NodeEnvs } from '.';
 const ENV = jetEnv({
   NodeEnv: isEnumVal(NodeEnvs),
   Port: num,
+  MongodbUri: String,
 });
 
 

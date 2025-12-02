@@ -11,6 +11,10 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 I'm using v22.15.0 and v10.9.2, but it should work with any recent version.
 
+## Step 2: Run MongoDB locally
+
+Set the URL to `mongodb://localhost:27017/duel`
+
 ### Step 3: Install dependencies and run the server
 
 - npm i
