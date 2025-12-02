@@ -10,7 +10,7 @@ const DateFormatter = new Intl.DateTimeFormat('en-US', {
   day: '2-digit',
 });
 
-const formatDate = (date) => DateFormatter.format(new Date(date));
+const formatDate = (date) => DateFormatter.format(new Date());
 
 
 /******************************************************************************
@@ -40,7 +40,8 @@ function displayUsers() {
       allUsersAnchor.innerHTML = template({
         users: resp.users.map(user => ({
           ...user,
-          createdFormatted: formatDate(user.created),
+          createdFormatted: user.joined_at ? formatDate(user.joined_at) : formatDate(user.created),
+          id: user.user_id || user.id,
         })),
       });
     });
