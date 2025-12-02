@@ -1,4 +1,5 @@
 import { Router } from "express";
+import mirrorRoutes from "./mirrorRoutes";
 import programRoutes from "./programRoutes";
 import taskRoutes from "./taskRoutes";
 import topProgramReportRoutes from "./topProgramReportRoutes";
@@ -11,6 +12,7 @@ const router = Router();
 router.use("/tasks", taskRoutes);
 router.use("/programs", programRoutes);
 router.use("/users", userRoutes);
+router.use("/mirror", mirrorRoutes);
 router.use("/reports/users/top", topUsersReportRoutes);
 router.use("/reports/programs/top", topProgramReportRoutes);
 
