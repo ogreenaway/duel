@@ -80,7 +80,7 @@ const UsersTable = () => {
             <th>Email</th>
             <th>Instagram Handle</th>
             <th>TikTok Handle</th>
-            <th>Joined At</th>
+            <th>Joined</th>
           </tr>
         </thead>
         <tbody>
@@ -93,7 +93,18 @@ const UsersTable = () => {
               <td>{user.email}</td>
               <td>{user.instagram_handle}</td>
               <td>{user.tiktok_handle}</td>
-              <td>{user.joined_at}</td>
+              <td>
+                {user.joined_at
+                  ? new Date(user.joined_at).toLocaleString("en-GB", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })
+                  : null}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,7 +1,6 @@
 import { Alert, Card, Container, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
-import Currency from "../../components/Currency";
 import NavBar from "../../components/NavBar";
 import { User } from "../../types/UserModel";
 import { useParams } from "react-router-dom";
