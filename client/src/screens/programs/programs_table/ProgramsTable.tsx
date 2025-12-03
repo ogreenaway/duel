@@ -1,9 +1,10 @@
-import { Alert, Spinner, Table } from "react-bootstrap";
+import { Alert, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import Currency from "../../../components/Currency";
 import LimitSelector from "../../../components/LimitSelector";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 import { Pagination } from "../../../types/pagination";
 import { Program } from "../../../types/ProgramModel";
 import TablePagination from "../../../components/Pagination";
@@ -28,7 +29,7 @@ const getPrograms = async ({
   setLoading(true);
   try {
     const response = await fetch(
-      `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`,
+      `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`
     );
     const data = await response.json();
     setPrograms(data.data);
@@ -64,11 +65,7 @@ const ProgramsTable = () => {
   }
 
   if (loading) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

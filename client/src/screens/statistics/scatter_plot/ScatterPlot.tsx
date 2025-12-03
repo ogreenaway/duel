@@ -1,4 +1,4 @@
-import { Alert, Col, Form, Row, Spinner } from "react-bootstrap";
+import { Alert, Col, Form, Row } from "react-bootstrap";
 import {
   CartesianGrid,
   ResponsiveContainer,
@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../components/LimitSelector";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 import { Pagination } from "../../../types/pagination";
 import TablePagination from "../../../components/Pagination";
 import { Task } from "../../../types/TaskModel";
@@ -28,10 +29,10 @@ interface ScatterDataPoint {
 
 const getTasks = async (
   page: number,
-  limit: number,
+  limit: number
 ): Promise<{ data: TaskWithSales[]; pagination: Pagination }> => {
   const response = await fetch(
-    `http://localhost:5000/tasks?page=${page}&limit=${limit}`,
+    `http://localhost:5000/tasks?page=${page}&limit=${limit}`
   );
   const result = await response.json();
   return result;
@@ -116,11 +117,7 @@ const ScatterPlot = () => {
   }
 
   if (loading) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
+    return <LoadingSpinner />;
   }
 
   const scatterData = getScatterData();

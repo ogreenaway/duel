@@ -1,8 +1,9 @@
-import { Alert, Card, Container, Spinner } from "react-bootstrap";
+import { Alert, Card, Container } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Currency from "../../components/Currency";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import NavBar from "../../components/NavBar";
 import { Program } from "../../types/ProgramModel";
 
@@ -39,9 +40,7 @@ const ProgramScreen = () => {
       <>
         <NavBar />
         <Container className="mt-4">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+          <LoadingSpinner />
         </Container>
       </>
     );

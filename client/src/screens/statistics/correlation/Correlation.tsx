@@ -1,5 +1,7 @@
-import { Card, Row, Spinner } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
+
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 interface CorrelationData {
   reachCorrelationCoefficient: number;
@@ -18,7 +20,7 @@ const Correlation = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "http://localhost:5000/reports/correlation-coefficients",
+          "http://localhost:5000/reports/correlation-coefficients"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch correlation coefficients");
@@ -40,13 +42,7 @@ const Correlation = () => {
   };
 
   if (loading) {
-    return (
-      <div className="text-center">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {

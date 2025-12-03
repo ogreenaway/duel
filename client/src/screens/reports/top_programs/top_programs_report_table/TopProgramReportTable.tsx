@@ -1,9 +1,10 @@
-import { Alert, Spinner, Table } from "react-bootstrap";
+import { Alert, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import Currency from "../../../../components/Currency";
 import LimitSelector from "../../../../components/LimitSelector";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { Pagination } from "../../../../types/pagination";
 import TablePagination from "../../../../components/Pagination";
 import { TopProgram } from "../../../../types/TopProgramReport";
@@ -32,7 +33,7 @@ const getTopProgramsReport = async ({
       limit: currentLimit.toString(),
     });
     const response = await fetch(
-      `http://localhost:5000/reports/programs/top?${params.toString()}`,
+      `http://localhost:5000/reports/programs/top?${params.toString()}`
     );
     const data = await response.json();
     setReportData(data.data);
@@ -68,11 +69,7 @@ const TopProgramReportTable = () => {
   }
 
   if (loading) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../../components/LimitSelector";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { Pagination } from "../../../../types/pagination";
 import TablePagination from "../../../../components/Pagination";
 
@@ -43,7 +44,7 @@ const getTopUsersReport = async ({
       params.append("platform", platform);
     }
     const response = await fetch(
-      `http://localhost:5000/reports/users/top?${params.toString()}`,
+      `http://localhost:5000/reports/users/top?${params.toString()}`
     );
     const data = await response.json();
     setReportData(data.data);
@@ -83,11 +84,7 @@ const TopUsersReportTable = () => {
   }
 
   if (loading) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
