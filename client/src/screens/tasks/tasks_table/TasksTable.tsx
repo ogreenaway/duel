@@ -1,19 +1,28 @@
-import { Spinner, Table } from "react-bootstrap";
+import { Alert, Spinner, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
+import LimitSelector from "../../../components/LimitSelector";
+import { Pagination } from "../../../types/pagination";
+import TablePagination from "../../../components/Pagination";
 import { Task } from "../../../../../server/src/models/TaskModel";
 
 const TasksTable = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLimit, setCurrentLimit] = useState(10);
 
   const getTasks = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/tasks");
+      const response = await fetch(
+        `http://localhost:5000/tasks?page=${currentPage}&limit=${currentLimit}`
+      );
       const data = await response.json();
       setTasks(data.data);
+      setPagination(data.pagination);
     } catch (error) {
       setError(error as Error);
     } finally {
@@ -23,7 +32,11 @@ const TasksTable = () => {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [currentPage, currentLimit]);
+
+  if (error) {
+    return <Alert variant={"danger"}>{error.message}</Alert>;
+  }
 
   if (loading) {
     return (
@@ -34,34 +47,48 @@ const TasksTable = () => {
   }
 
   return (
-    <Table responsive striped>
-      <thead>
-        <tr>
-          <th>Task ID</th>
-          {/* <th>Legacy Task ID</th> */}
-          <th>Platform</th>
-          <th>Post URL</th>
-          <th>Likes</th>
-          <th>Comments</th>
-          <th>Shares</th>
-          <th>Reach</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tasks.map((task) => (
-          <tr key={task._id.toString()}>
-            <td>{task._id.toString()}</td>
-            {/* <td>{task.legacy_task_id}</td> */}
-            <td>{task.platform}</td>
-            <td>{task.post_url}</td>
-            <td>{task.likes}</td>
-            <td>{task.comments}</td>
-            <td>{task.shares}</td>
-            <td>{task.reach}</td>
+    <>
+      <Table responsive striped>
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            {/* <th>Legacy Task ID</th> */}
+            <th>Platform</th>
+            <th>Post URL</th>
+            <th>Likes</th>
+            <th>Comments</th>
+            <th>Shares</th>
+            <th>Reach</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {tasks.map((task) => (
+            <tr key={task._id.toString()}>
+              <td>{task._id.toString()}</td>
+              {/* <td>{task.legacy_task_id}</td> */}
+              <td>{task.platform}</td>
+              <td>{task.post_url}</td>
+              <td>{task.likes}</td>
+              <td>{task.comments}</td>
+              <td>{task.shares}</td>
+              <td>{task.reach}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <TablePagination
+          pagination={pagination}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+        <LimitSelector
+          currentLimit={currentLimit}
+          setCurrentLimit={setCurrentLimit}
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
-import Tasks from "./screens/tasks/Tasks";
+import TasksScreen from "./screens/tasks/TasksScreen";
 
 function App() {
-  return <Tasks />;
+  return <TasksScreen />;
 }
 
 export default App;

@@ -20,7 +20,11 @@ router.get("/", async (req: Request, res: Response) => {
  * Get a single task by ID
  */
 router.get("/:id", async (req: Request, res: Response) => {
+  // Improvement: validate the id is a valid ObjectId
   const task = await getTaskById(req.params.id);
+  if (!task) {
+    return res.status(404).json({ error: "Task not found" });
+  }
   return res.json(task);
 });
 

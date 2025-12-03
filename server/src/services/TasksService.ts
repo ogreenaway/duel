@@ -3,7 +3,7 @@ import { Filter, ObjectId } from "mongodb";
 import { Task } from "../models/TaskModel";
 import mongoDb from "../database/MongoDb";
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 export interface PaginatedTasks {
   data: Task[];
