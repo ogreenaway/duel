@@ -144,10 +144,10 @@ const TopUsersReportTable = () => {
           }}
           className="w-auto"
         >
-          <option value="all">All Platforms</option>
-          <option value="TikTok">TikTok</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Facebook">Facebook</option>
+          <option value="all">From all platforms</option>
+          <option value="TikTok">Only from TikTok</option>
+          <option value="Instagram">Only from Instagram</option>
+          <option value="Facebook">Only from Facebook</option>
         </Form.Select>
         <LimitSelector
           currentLimit={currentLimit}
