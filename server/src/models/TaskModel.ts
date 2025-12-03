@@ -14,3 +14,7 @@ export type Task = {
   shares: number | null;
   reach: number | null;
 };
+
+export type TaskWithSales = Task & {
+  total_sales_attributed: number | null;
+};
