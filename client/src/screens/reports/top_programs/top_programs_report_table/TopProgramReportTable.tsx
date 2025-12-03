@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Currency from "../../../../components/Currency";
 import LimitSelector from "../../../../components/LimitSelector";
+import { Link } from "react-router-dom";
 import { Pagination } from "../../../../types/pagination";
 import TablePagination from "../../../../components/Pagination";
 import { TopProgram } from "../../../../types/TopProgramReport";
@@ -88,7 +89,9 @@ const TopProgramReportTable = () => {
         <tbody>
           {reportData.map((program) => (
             <tr key={program._id}>
-              <td>{program._id}</td>
+              <td>
+                <Link to={`/programs/${program._id}`}>{program._id}</Link>
+              </td>
               <td>{program.legacy_program_id}</td>
               <td>{program.brand}</td>
               <td>
