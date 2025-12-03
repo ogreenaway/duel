@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { getAllTasks, getTaskById } from "../services/TasksService";
 
+import { ObjectId } from "mongodb";
 import { getPaginationParams } from "../common/util/pagination";
 
 const router = Router();
@@ -20,7 +21,9 @@ router.get("/", async (req: Request, res: Response) => {
  * Get a single task by ID
  */
 router.get("/:id", async (req: Request, res: Response) => {
-  // Improvement: validate the id is a valid ObjectId
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: "Invalid ID format" });
+  }
   const task = await getTaskById(req.params.id);
   if (!task) {
     return res.status(404).json({ error: "Task not found" });
