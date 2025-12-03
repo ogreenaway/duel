@@ -1,3 +1,11 @@
+# Description
+
+This repo contains:
+
+1. A node script to sanitise and normalise the provided data and add it to a MongoDB database
+2. An ExpressJs backend, written in TypeScript, to get the data
+3. A React frontend, also written in TypeScript, to view and analyse the data
+
 # How to run locally
 
 ### Step 1: Check you have recent Node and NPM versions
@@ -19,11 +27,18 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 `npm run import-data`
 
-### Step 5: Install dependencies and run the server
+### Step 5: Install backend dependencies
 
 - npm i
-- npm start
+
+### Step 6: Run the backend
+
+- npm run dev
 - url: http://localhost:3000/
+
+### Step 7: Install the frontend dependencies
+
+### Step 8: Run the frontend
 
 # Insights about the data
 
@@ -35,11 +50,9 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 # Improvements
 
-- Add HTTPS
-- Add Prettier
-- Could add CRUD for tasks, programs, and users
-- Create API to return clean data (paginated)
+- Add CRUD for tasks, programs, and users
+- add a package.json to the root to make setup easier
 
 # Deliberate omissions
 
-- Authentication
+- Authentication and security
