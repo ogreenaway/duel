@@ -1,10 +1,7 @@
 import { Task } from "../../models/TaskModel";
-import { getCleanComments } from "./getCleanComments";
-import { getCleanLikes } from "./getCleanLikes";
 import { getCleanPlatform } from "./getCleanPlatform";
+import { getCleanPositiveInteger } from "../common/getCleanPositiveInteger";
 import { getCleanPostUrl } from "./getCleanPostUrl";
-import { getCleanReach } from "./getCleanReach";
-import { getCleanShares } from "./getCleanShares";
 
 export const getCleanTasksCompletes = (
   task: any,
@@ -13,9 +10,9 @@ export const getCleanTasksCompletes = (
     legacy_task_id: task.task_id,
     platform: getCleanPlatform(task.platform),
     post_url: getCleanPostUrl(task.post_url),
-    likes: getCleanLikes(task.likes),
-    comments: getCleanComments(task.comments),
-    shares: getCleanShares(task.shares),
-    reach: getCleanReach(task.reach),
+    likes: getCleanPositiveInteger(task.likes),
+    comments: getCleanPositiveInteger(task.comments),
+    shares: getCleanPositiveInteger(task.shares),
+    reach: getCleanPositiveInteger(task.reach),
   };
 };
