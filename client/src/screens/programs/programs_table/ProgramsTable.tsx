@@ -1,6 +1,7 @@
 import { Alert, Spinner, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
+import Currency from "../../../components/Currency";
 import LimitSelector from "../../../components/LimitSelector";
 import { Pagination } from "../../../types/pagination";
 import { Program } from "../../../types/ProgramModel";
@@ -86,7 +87,9 @@ const ProgramsTable = () => {
               <td>{program._id}</td>
               <td>{program.legacy_program_id}</td>
               <td>{program.brand}</td>
-              <td>{program.total_sales_attributed}</td>
+              <td>
+                <Currency value={program.total_sales_attributed} />
+              </td>
             </tr>
           ))}
         </tbody>
