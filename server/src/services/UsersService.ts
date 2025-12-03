@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { User } from "../models/UserModel";
 import mongoDb from "../database/MongoDb";
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 export interface PaginatedUsers {
   data: User[];

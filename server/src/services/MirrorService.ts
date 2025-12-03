@@ -12,7 +12,7 @@ export interface PaginatedMirrorUsers {
   };
 }
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 /**
  * Get users with nested programs and tasks (mirror structure)

@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { Program } from "../models/ProgramModel";
 import mongoDb from "../database/MongoDb";
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 export interface PaginatedPrograms {
   data: Program[];

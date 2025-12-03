@@ -18,7 +18,7 @@ export interface PaginatedTopPrograms {
   };
 }
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 /**
  * Get top programs by total_sales_attributed

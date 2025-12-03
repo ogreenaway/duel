@@ -15,6 +15,7 @@ const NavBar = () => {
             <Nav.Link href="/programs">Programs</Nav.Link>
             <Nav.Link href="/users">Users</Nav.Link>
             <Nav.Link href="/reports/top-users">Top Users</Nav.Link>
+            <Nav.Link href="/reports/top-programs">Top Programs</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

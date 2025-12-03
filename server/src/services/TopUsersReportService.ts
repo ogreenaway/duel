@@ -29,7 +29,7 @@ export interface PaginatedTopUsersReport {
   };
 }
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 10000;
 
 /**
  * Get top users report based on various metrics
