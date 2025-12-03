@@ -1,4 +1,4 @@
-import { Task } from "../../models/UserModel";
+import { Task } from "../../models/TaskModel";
 import { getCleanComments } from "./getCleanComments";
 import { getCleanLikes } from "./getCleanLikes";
 import { getCleanPlatform } from "./getCleanPlatform";

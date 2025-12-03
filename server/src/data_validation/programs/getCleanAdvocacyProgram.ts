@@ -1,4 +1,4 @@
-import type { Program } from "../../models/UserModel";
+import type { Program } from "../../models/ProgramModel";
 import { getCleanBrand } from "./getCleanBrand";
 import { getCleanTotalSalesAttributed } from "./getCleanTotalSalesAttributed";
 

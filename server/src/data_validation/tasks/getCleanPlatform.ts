@@ -1,4 +1,4 @@
-import { Platform } from "../../models/UserModel";
+import { Platform } from "../../models/TaskModel";
 
 export const getCleanPlatform = (platform: unknown): Platform | null => {
   if (

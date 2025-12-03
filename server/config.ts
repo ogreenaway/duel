@@ -1,8 +1,8 @@
 /* eslint-disable n/no-process-env */
 
-import path from "path";
 import dotenv from "dotenv";
 import moduleAlias from "module-alias";
+import path from "path";
 
 // Check the env
 const NODE_ENV = process.env.NODE_ENV ?? "development";
@@ -19,3 +19,5 @@ if (result2.error) {
 if (__filename.endsWith("js")) {
   moduleAlias.addAlias("@src", __dirname + "/dist");
 }
+
+// TODO: Can this file be deleted?
