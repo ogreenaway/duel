@@ -89,7 +89,7 @@ const TaskScreen = () => {
                 <Link to={`/users/${task.user_id}`}>{task.user_id}</Link>
               </p>
               <p>
-                <strong>Platform ID:</strong> {task.platform_id}
+                <strong>Program ID:</strong> {task.program_id}
               </p>
               <p className="mb-0">
                 <strong>Platform:</strong> {task.platform || "Not provided"}

@@ -6,7 +6,7 @@ export type Task = {
   _id: ObjectId;
   legacy_task_id: string;
   user_id: string;
-  platform_id: string;
+  program_id: ObjectId;
   platform: Platform | null;
   post_url: string | null;
   likes: number | null;

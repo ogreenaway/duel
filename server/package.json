@@ -30,7 +30,8 @@
     "jsonfile": "^6.2.0",
     "module-alias": "^2.2.3",
     "mongodb": "7.0",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "simple-statistics": "^7.8.8"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

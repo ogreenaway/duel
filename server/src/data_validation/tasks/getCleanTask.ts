@@ -5,7 +5,7 @@ import { getCleanPostUrl } from "./getCleanPostUrl";
 
 export const getCleanTasksCompletes = (
   task: any,
-): Omit<Task, "_id" | "user_id" | "platform_id"> => {
+): Omit<Task, "_id" | "user_id" | "program_id"> => {
   return {
     legacy_task_id: task.task_id,
     platform: getCleanPlatform(task.platform),
