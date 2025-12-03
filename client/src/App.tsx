@@ -1,8 +1,13 @@
+import AppRoutes from "./screens/Routes";
+import { BrowserRouter } from "react-router-dom";
 import React from "react";
-import TasksScreen from "./screens/tasks/TasksScreen";
 
 function App() {
-  return <TasksScreen />;
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App;
