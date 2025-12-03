@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../../components/LimitSelector";
+import { Link } from "react-router-dom";
 import { Pagination } from "../../../../types/pagination";
 import TablePagination from "../../../../components/Pagination";
 
@@ -105,7 +106,9 @@ const TopUsersReportTable = () => {
         <tbody>
           {reportData.map((stats) => (
             <tr key={stats.user._id}>
-              <td>{stats.user._id}</td>
+              <td>
+                <Link to={`/users/${stats.user._id}`}>{stats.user._id}</Link>
+              </td>
               <td>{stats.user.name}</td>
               <td>{stats.totalLikes}</td>
               <td>{stats.totalComments}</td>
