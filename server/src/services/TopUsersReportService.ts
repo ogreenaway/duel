@@ -81,7 +81,7 @@ export async function getTopUsersReport(
         },
       },
       { $unwind: "$user" },
-      { $sort: { [sortField]: -1 } },
+      { $sort: { [sortField]: -1, _id: 1 } },
       {
         $facet: {
           data: [{ $skip: skip }, { $limit: limitNum }],
