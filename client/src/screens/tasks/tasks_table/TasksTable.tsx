@@ -6,6 +6,38 @@ import { Pagination } from "../../../types/pagination";
 import TablePagination from "../../../components/Pagination";
 import { Task } from "../../../../../server/src/models/TaskModel";
 
+interface GetTasksProps {
+  currentPage: number;
+  currentLimit: number;
+  setTasks: (tasks: Task[]) => void;
+  setPagination: (pagination: Pagination) => void;
+  setError: (error: Error) => void;
+  setLoading: (loading: boolean) => void;
+}
+
+const getTasks = async ({
+  currentPage,
+  currentLimit,
+  setTasks,
+  setPagination,
+  setError,
+  setLoading,
+}: GetTasksProps) => {
+  setLoading(true);
+  try {
+    const response = await fetch(
+      `http://localhost:5000/tasks?page=${currentPage}&limit=${currentLimit}`
+    );
+    const data = await response.json();
+    setTasks(data.data);
+    setPagination(data.pagination);
+  } catch (error) {
+    setError(error as Error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 const TasksTable = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -14,24 +46,15 @@ const TasksTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
 
-  const getTasks = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `http://localhost:5000/tasks?page=${currentPage}&limit=${currentLimit}`
-      );
-      const data = await response.json();
-      setTasks(data.data);
-      setPagination(data.pagination);
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getTasks();
+    getTasks({
+      currentPage,
+      currentLimit,
+      setTasks,
+      setPagination,
+      setError,
+      setLoading,
+    });
   }, [currentPage, currentLimit]);
 
   if (error) {

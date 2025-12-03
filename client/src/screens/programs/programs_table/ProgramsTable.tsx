@@ -6,6 +6,38 @@ import { Pagination } from "../../../types/pagination";
 import { Program } from "../../../types/ProgramModel";
 import TablePagination from "../../../components/Pagination";
 
+interface GetProgramsProps {
+  currentPage: number;
+  currentLimit: number;
+  setPrograms: (programs: Program[]) => void;
+  setPagination: (pagination: Pagination) => void;
+  setError: (error: Error) => void;
+  setLoading: (loading: boolean) => void;
+}
+
+const getPrograms = async ({
+  currentPage,
+  currentLimit,
+  setPrograms,
+  setPagination,
+  setError,
+  setLoading,
+}: GetProgramsProps) => {
+  setLoading(true);
+  try {
+    const response = await fetch(
+      `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`
+    );
+    const data = await response.json();
+    setPrograms(data.data);
+    setPagination(data.pagination);
+  } catch (error) {
+    setError(error as Error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 const ProgramsTable = () => {
   const [programs, setPrograms] = useState<Program[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -14,24 +46,15 @@ const ProgramsTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
 
-  const getPrograms = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`
-      );
-      const data = await response.json();
-      setPrograms(data.data);
-      setPagination(data.pagination);
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getPrograms();
+    getPrograms({
+      currentPage,
+      currentLimit,
+      setPrograms,
+      setPagination,
+      setError,
+      setLoading,
+    });
   }, [currentPage, currentLimit]);
 
   if (error) {
