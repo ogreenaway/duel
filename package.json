@@ -1,0 +1,14 @@
+{
+  "name": "duel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "import-data": "npm run import-data --prefix server",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "npm start --prefix server",
+    "start:client": "npm start --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
