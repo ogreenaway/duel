@@ -1,6 +1,6 @@
 import { User } from "./UserModel";
 
-export type SortBy = "likes" | "comments" | "shares";
+export type SortBy = "likes" | "comments" | "shares" | "reach";
 
 export type Platform = "TikTok" | "Instagram" | "Facebook";
 
@@ -11,4 +11,3 @@ export interface UserReportStats {
   totalShares: number;
   totalReach: number;
 }
-

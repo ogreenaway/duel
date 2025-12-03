@@ -2,7 +2,7 @@ import { Platform } from "../models/TaskModel";
 import { User } from "../models/UserModel";
 import mongoDb from "../database/MongoDb";
 
-export type SortBy = "likes" | "comments" | "shares";
+export type SortBy = "likes" | "comments" | "shares" | "reach";
 
 export interface TopUsersReportParams {
   page?: number;

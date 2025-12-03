@@ -16,7 +16,7 @@ const router = Router();
  * Query params:
  * - page: number (default: 1)
  * - limit: number (default: 20, max: 100)
- * - sortBy: 'likes' | 'comments' | 'shares' (default: 'likes')
+ * - sortBy: 'likes' | 'comments' | 'shares' | 'reach' (default: 'likes')
  * - platform: 'TikTok' | 'Instagram' | 'Facebook' (optional)
  */
 router.get("/", async (req: Request, res: Response) => {
@@ -34,7 +34,7 @@ router.get("/", async (req: Request, res: Response) => {
       : undefined;
 
     // Validate sortBy
-    const validSortBy: SortBy[] = ["likes", "comments", "shares"];
+    const validSortBy: SortBy[] = ["likes", "comments", "shares", "reach"];
     if (sortBy && !validSortBy.includes(sortBy)) {
       return res.status(400).json({
         error: `Invalid sortBy parameter. Must be one of: ${validSortBy.join(

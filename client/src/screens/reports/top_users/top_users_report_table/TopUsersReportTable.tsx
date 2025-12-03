@@ -133,6 +133,7 @@ const TopUsersReportTable = () => {
           <option value="likes">Sort by Likes</option>
           <option value="comments">Sort by Comments</option>
           <option value="shares">Sort by Shares</option>
+          <option value="reach">Sort by Reach</option>
         </Form.Select>
         <Form.Select
           value={platform || "all"}
