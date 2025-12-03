@@ -2,6 +2,7 @@ import { Alert, Spinner, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../components/LimitSelector";
+import { Link } from "react-router-dom";
 import { Pagination } from "../../../types/pagination";
 import TablePagination from "../../../components/Pagination";
 import { Task } from "../../../../../server/src/models/TaskModel";
@@ -82,6 +83,7 @@ const TasksTable = () => {
             <th>Comments</th>
             <th>Shares</th>
             <th>Reach</th>
+            <th>Completed By</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +97,9 @@ const TasksTable = () => {
               <td>{task.comments}</td>
               <td>{task.shares}</td>
               <td>{task.reach}</td>
+              <td>
+                <Link to={`/users/${task.user_id}`}>View User</Link>
+              </td>
             </tr>
           ))}
         </tbody>
