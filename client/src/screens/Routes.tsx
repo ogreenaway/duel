@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import PageNotFound from "./not_found/PageNotFound";
 import ProgramScreen from "./programs/ProgramScreen";
 import ProgramsScreen from "./programs/ProgramsScreen";
+import StatisticsScreen from "./statistics/StatisticsScreen";
 import TaskScreen from "./tasks/TaskScreen";
 import TasksScreen from "./tasks/TasksScreen";
 import TopProgramReportScreen from "./reports/top_programs/TopProgramReportScreen";
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         path="/reports/top-programs"
         element={<TopProgramReportScreen />}
       />
+      <Route path="/reports/statistics" element={<StatisticsScreen />} />
       <Route path="/" element={<TasksScreen />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
