@@ -6,7 +6,7 @@ const NavBar = () => {
   const location = useLocation();
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="lg">
+    <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -14,7 +14,7 @@ const NavBar = () => {
             <Nav.Link href="/">Tasks</Nav.Link>
             <Nav.Link href="/programs">Programs</Nav.Link>
             <Nav.Link href="/users">Users</Nav.Link>
-            <Nav.Link href="/reports">Reports</Nav.Link>
+            <Nav.Link href="/reports/top-users">Top Users</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
