@@ -28,10 +28,10 @@ interface ScatterDataPoint {
 
 const getTasks = async (
   page: number,
-  limit: number
+  limit: number,
 ): Promise<{ data: TaskWithSales[]; pagination: Pagination }> => {
   const response = await fetch(
-    `http://localhost:5000/tasks?page=${page}&limit=${limit}`
+    `http://localhost:5000/tasks?page=${page}&limit=${limit}`,
   );
   const result = await response.json();
   return result;

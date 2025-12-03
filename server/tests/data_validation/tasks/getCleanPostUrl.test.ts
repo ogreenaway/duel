@@ -50,4 +50,3 @@ describe("getCleanPostUrl", () => {
     expect(getCleanPostUrl("")).toBeNull();
   });
 });
-

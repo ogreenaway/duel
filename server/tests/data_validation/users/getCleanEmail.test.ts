@@ -3,7 +3,9 @@ import { getCleanEmail } from "@src/data_validation/users/getCleanEmail";
 describe("getCleanEmail", () => {
   it("should return valid email when given a valid email", () => {
     expect(getCleanEmail("test@example.com")).toBe("test@example.com");
-    expect(getCleanEmail("user.name@domain.co.uk")).toBe("user.name@domain.co.uk");
+    expect(getCleanEmail("user.name@domain.co.uk")).toBe(
+      "user.name@domain.co.uk",
+    );
     expect(getCleanEmail("user+tag@example.com")).toBe("user+tag@example.com");
   });
 
@@ -38,4 +40,3 @@ describe("getCleanEmail", () => {
     expect(getCleanEmail("")).toBeNull();
   });
 });
-

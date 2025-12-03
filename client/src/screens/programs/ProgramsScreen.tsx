@@ -15,4 +15,3 @@ const ProgramsScreen = () => {
 };
 
 export default ProgramsScreen;
-

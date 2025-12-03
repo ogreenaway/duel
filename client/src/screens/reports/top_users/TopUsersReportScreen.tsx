@@ -7,7 +7,9 @@ const TopUsersReportScreen = () => {
     <>
       <NavBar />
       <Container>
-        <h1 className="text-center m-4 text-decoration-underline">Top Users Report</h1>
+        <h1 className="text-center m-4 text-decoration-underline">
+          Top Users Report
+        </h1>
         <TopUsersReportTable />
       </Container>
     </>
@@ -15,4 +17,3 @@ const TopUsersReportScreen = () => {
 };
 
 export default TopUsersReportScreen;
-

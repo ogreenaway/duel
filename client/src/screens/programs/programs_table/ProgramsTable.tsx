@@ -28,7 +28,7 @@ const getPrograms = async ({
   setLoading(true);
   try {
     const response = await fetch(
-      `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`
+      `http://localhost:5000/programs?page=${currentPage}&limit=${currentLimit}`,
     );
     const data = await response.json();
     setPrograms(data.data);

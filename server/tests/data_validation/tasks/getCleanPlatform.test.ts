@@ -43,4 +43,3 @@ describe("getCleanPlatform", () => {
     expect(getCleanPlatform("")).toBeNull();
   });
 });
-

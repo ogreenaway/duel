@@ -18,7 +18,7 @@ const Correlation = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "http://localhost:5000/reports/correlation-coefficients"
+          "http://localhost:5000/reports/correlation-coefficients",
         );
         if (!response.ok) {
           throw new Error("Failed to fetch correlation coefficients");

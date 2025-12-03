@@ -43,7 +43,7 @@ const getTopUsersReport = async ({
       params.append("platform", platform);
     }
     const response = await fetch(
-      `http://localhost:5000/reports/users/top?${params.toString()}`
+      `http://localhost:5000/reports/users/top?${params.toString()}`,
     );
     const data = await response.json();
     setReportData(data.data);

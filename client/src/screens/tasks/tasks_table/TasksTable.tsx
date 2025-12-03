@@ -27,7 +27,7 @@ const getTasks = async ({
   setLoading(true);
   try {
     const response = await fetch(
-      `http://localhost:5000/tasks?page=${currentPage}&limit=${currentLimit}`
+      `http://localhost:5000/tasks?page=${currentPage}&limit=${currentLimit}`,
     );
     const data = await response.json();
     setTasks(data.data);

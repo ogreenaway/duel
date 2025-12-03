@@ -32,7 +32,7 @@ const getTopProgramsReport = async ({
       limit: currentLimit.toString(),
     });
     const response = await fetch(
-      `http://localhost:5000/reports/programs/top?${params.toString()}`
+      `http://localhost:5000/reports/programs/top?${params.toString()}`,
     );
     const data = await response.json();
     setReportData(data.data);
