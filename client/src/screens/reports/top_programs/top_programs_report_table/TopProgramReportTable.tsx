@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Currency from "../../../../components/Currency";
 import LimitSelector from "../../../../components/LimitSelector";
 import { Pagination } from "../../../../types/pagination";
-import { TopProgram } from "../../../../types/TopProgramReport";
 import TablePagination from "../../../../components/Pagination";
+import { TopProgram } from "../../../../types/TopProgramReport";
 
 interface GetTopProgramsReportProps {
   currentPage: number;
@@ -116,4 +116,3 @@ const TopProgramReportTable = () => {
 };
 
 export default TopProgramReportTable;
-

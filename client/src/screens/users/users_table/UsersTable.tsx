@@ -1,11 +1,11 @@
 import { Alert, Spinner, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../components/LimitSelector";
+import { Link } from "react-router-dom";
 import { Pagination } from "../../../types/pagination";
-import { User } from "../../../types/UserModel";
 import TablePagination from "../../../components/Pagination";
+import { User } from "../../../types/UserModel";
 
 interface GetUsersProps {
   currentPage: number;
@@ -116,4 +116,3 @@ const UsersTable = () => {
 };
 
 export default UsersTable;
-

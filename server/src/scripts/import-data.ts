@@ -11,6 +11,65 @@ const MONGODB_URI = "mongodb://localhost:27017/duel";
 const INITIAL_DATA_DIR = path.join(__dirname, "../../../initial_data");
 const MAX_FILES = 10000;
 
+interface InvalidProperty {
+  entityType: "user" | "program" | "task";
+  property: string;
+  value: unknown;
+}
+
+// Helper function to find properties that were set to null
+function findNullifiedProperties(
+  original: any,
+  cleaned: any,
+  entityType: "user" | "program" | "task",
+): InvalidProperty[] {
+  const invalid: InvalidProperty[] = [];
+
+  // Map original property names to cleaned property names
+  // Note: ID fields (user_id, program_id, task_id) are not cleaned, just copied, so we don't track them
+  const propertyMap: Record<string, string> = {};
+  if (entityType === "user") {
+    propertyMap.name = "name";
+    propertyMap.email = "email";
+    propertyMap.instagram_handle = "instagram_handle";
+    propertyMap.tiktok_handle = "tiktok_handle";
+    propertyMap.joined_at = "joined_at";
+  } else if (entityType === "program") {
+    propertyMap.brand = "brand";
+    propertyMap.total_sales_attributed = "total_sales_attributed";
+  } else if (entityType === "task") {
+    propertyMap.platform = "platform";
+    propertyMap.post_url = "post_url";
+    propertyMap.likes = "likes";
+    propertyMap.comments = "comments";
+    propertyMap.shares = "shares";
+    propertyMap.reach = "reach";
+  }
+
+  for (const [originalKey, cleanedKey] of Object.entries(propertyMap)) {
+    const originalValue = original?.[originalKey];
+    const cleanedValue = cleaned?.[cleanedKey];
+
+    // Only track if:
+    // 1. Original value exists and is not null, undefined, or empty string
+    // 2. Cleaned value is null
+    if (
+      originalValue !== null &&
+      originalValue !== undefined &&
+      originalValue !== "" &&
+      cleanedValue === null
+    ) {
+      invalid.push({
+        entityType,
+        property: originalKey,
+        value: originalValue,
+      });
+    }
+  }
+
+  return invalid;
+}
+
 async function importData() {
   const client = new MongoClient(MONGODB_URI);
 
@@ -37,6 +96,7 @@ async function importData() {
 
     let imported = 0;
     let skipped = 0;
+    const invalidProperties: InvalidProperty[] = [];
 
     for (const file of files) {
       const filePath = path.join(INITIAL_DATA_DIR, file);
@@ -64,11 +124,24 @@ async function importData() {
       }
 
       const user = getCleanUser(userData);
+
+      // Track properties set to null for user
+      const userInvalid = findNullifiedProperties(userData, user, "user");
+      invalidProperties.push(...userInvalid);
+
       const { insertedId: user_id } = await usersCollection.insertOne(user);
       const advocacyPrograms = userData.advocacy_programs || [];
 
       for (const programData of advocacyPrograms) {
         const program = getCleanAdvocacyProgram(programData);
+
+        // Track properties set to null for program
+        const programInvalid = findNullifiedProperties(
+          programData,
+          program,
+          "program",
+        );
+        invalidProperties.push(...programInvalid);
 
         const { insertedId: program_id } = await programsCollection.insertOne({
           ...program,
@@ -78,6 +151,11 @@ async function importData() {
         const tasksCompleted = programData.tasks_completed || [];
         for (const taskData of tasksCompleted) {
           const task = getCleanTasksCompletes(taskData);
+
+          // Track properties set to null for task
+          const taskInvalid = findNullifiedProperties(taskData, task, "task");
+          invalidProperties.push(...taskInvalid);
+
           await tasksCollection.insertOne({
             ...task,
             program_id: program_id,
@@ -97,6 +175,17 @@ async function importData() {
     if (skipped > 0) {
       console.log(`⚠️  Skipped ${skipped} files due to parsing errors`);
     }
+
+    // Write invalid properties to file
+    const outputPath = path.join(__dirname, "../../../invalid_properties.json");
+    fs.writeFileSync(
+      outputPath,
+      JSON.stringify(invalidProperties, null, 2),
+      "utf-8",
+    );
+    console.log(
+      `📝 Wrote ${invalidProperties.length} invalid properties to ${outputPath}`,
+    );
   } catch (error) {
     console.error("❌ Error importing data:", error);
     process.exit(1);

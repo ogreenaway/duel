@@ -16,15 +16,23 @@ describe("getCleanName", () => {
     expect(getCleanName("Mary O'Connor")).toBe("Mary O'Connor");
   });
 
+  it("should return valid name when given a name with titles", () => {
+    expect(getCleanName("Dr. Marian Morissette")).toBe("Dr. Marian Morissette");
+  });
+
+  it("should return valid names with hyphens", () => {
+    expect(getCleanName("Howard Windler-Cummerata")).toBe(
+      "Howard Windler-Cummerata",
+    );
+  });
+
   it("should return null when given a name with numbers", () => {
     expect(getCleanName("John123")).toBeNull();
     expect(getCleanName("John 2")).toBeNull();
   });
 
   it("should return null when given a name with special characters", () => {
-    expect(getCleanName("John-Smith")).toBeNull();
     expect(getCleanName("John@Smith")).toBeNull();
-    expect(getCleanName("John.Smith")).toBeNull();
   });
 
   it("should return null when given null or undefined", () => {
@@ -50,4 +58,3 @@ describe("getCleanName", () => {
     expect(getCleanName("")).toBeNull();
   });
 });
-

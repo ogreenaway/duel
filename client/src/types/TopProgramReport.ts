@@ -4,4 +4,3 @@ export interface TopProgram {
   brand: string | null;
   total_sales_attributed: number;
 }
-

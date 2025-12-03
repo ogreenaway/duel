@@ -1,6 +1,6 @@
 import { Alert, Card, Container, Spinner } from "react-bootstrap";
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Currency from "../../components/Currency";
 import NavBar from "../../components/NavBar";
@@ -102,7 +102,9 @@ const ProgramScreen = () => {
 
         {program.tasks_completed && program.tasks_completed.length > 0 && (
           <Card className="mt-4">
-            <Card.Header>Tasks Completed ({program.tasks_completed.length})</Card.Header>
+            <Card.Header>
+              Tasks Completed ({program.tasks_completed.length})
+            </Card.Header>
             <Card.Body>
               {program.tasks_completed.map((task, index) => (
                 <Card key={task._id || index} className="mb-3">
@@ -115,12 +117,17 @@ const ProgramScreen = () => {
                       <strong>Legacy Task ID:</strong> {task.legacy_task_id}
                     </p>
                     <p>
-                      <strong>Platform:</strong> {task.platform || "Not provided"}
+                      <strong>Platform:</strong>{" "}
+                      {task.platform || "Not provided"}
                     </p>
                     {task.post_url && (
                       <p>
                         <strong>Post URL:</strong>{" "}
-                        <a href={task.post_url} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={task.post_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {task.post_url}
                         </a>
                       </p>
@@ -129,7 +136,8 @@ const ProgramScreen = () => {
                       <strong>Likes:</strong> {task.likes ?? "Not provided"}
                     </p>
                     <p>
-                      <strong>Comments:</strong> {task.comments ?? "Not provided"}
+                      <strong>Comments:</strong>{" "}
+                      {task.comments ?? "Not provided"}
                     </p>
                     <p>
                       <strong>Shares:</strong> {task.shares ?? "Not provided"}
@@ -149,4 +157,3 @@ const ProgramScreen = () => {
 };
 
 export default ProgramScreen;
-

@@ -1,5 +1,6 @@
 # Initial data
 initial_data/*
+invalid_properties.json
 
 # Dependencies
 node_modules/

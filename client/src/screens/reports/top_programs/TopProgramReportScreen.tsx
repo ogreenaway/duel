@@ -7,7 +7,9 @@ const TopProgramReportScreen = () => {
     <>
       <NavBar />
       <Container>
-        <h1 className="text-center m-4 text-decoration-underline">Top Programs Report</h1>
+        <h1 className="text-center m-4 text-decoration-underline">
+          Top Programs Report
+        </h1>
         <TopProgramReportTable />
       </Container>
     </>
@@ -15,4 +17,3 @@ const TopProgramReportScreen = () => {
 };
 
 export default TopProgramReportScreen;
-
