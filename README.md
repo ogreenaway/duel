@@ -6,6 +6,8 @@ This repo contains:
 2. An ExpressJs TypeScript backend to get the data
 3. A React TypeScript frontend to view and analyse the data
 
+TODO: add a quick note about the pages
+
 # How to run locally
 
 ### Step 1: Check you have recent Node and NPM versions
@@ -45,6 +47,8 @@ I didn't want to leak your data in a public git repository, so you have to add i
 ### Step 8: Run the frontend
 
 - `npm start`
+
+# Screenshots
 
 # Insights about the data
 

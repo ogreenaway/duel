@@ -16,7 +16,7 @@ router.use("/users", userRoutes);
 // Reporting routes
 router.use("/reports/users/top", topUsersReportRoutes);
 router.use("/reports/programs/top", topProgramReportRoutes);
-router.use("/reports/outliers", outliersReportRoutes);
+router.use("/reports/correlation-coefficients", outliersReportRoutes);
 // Return the users in the format of the initial data
 router.use("/mirror", mirrorRoutes);
 
