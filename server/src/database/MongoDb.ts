@@ -1,6 +1,5 @@
 import { Collection, Db, MongoClient } from "mongodb";
 
-import ENV from "@src/common/constants/ENV";
 import { Program } from "@src/models/ProgramModel";
 import { Task } from "@src/models/TaskModel";
 import { User } from "@src/models/UserModel";
@@ -19,7 +18,7 @@ async function connect(): Promise<void> {
     return; // Already connected
   }
 
-  client = new MongoClient(ENV.MongodbUri);
+  client = new MongoClient("mongodb://localhost:27017/duel");
   await client.connect();
   db = client.db("duel");
 }
