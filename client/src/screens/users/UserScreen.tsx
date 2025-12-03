@@ -1,6 +1,7 @@
 import { Alert, Card, Container, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
+import FormatDate from "../../components/FormatDate";
 import NavBar from "../../components/NavBar";
 import { User } from "../../types/UserModel";
 import { useParams } from "react-router-dom";
@@ -95,7 +96,12 @@ const UserScreen = () => {
               </p>
 
               <p className="mb-0">
-                <strong>Joined At:</strong> {user.joined_at || "Not provided"}
+                <strong>Joined At:</strong>{" "}
+                {user.joined_at ? (
+                  <FormatDate date={user.joined_at} />
+                ) : (
+                  "Not provided"
+                )}
               </p>
             </Card.Text>
           </Card.Body>

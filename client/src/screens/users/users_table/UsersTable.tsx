@@ -1,6 +1,7 @@
 import { Alert, Spinner, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
+import FormatDate from "../../../components/FormatDate";
 import LimitSelector from "../../../components/LimitSelector";
 import { Link } from "react-router-dom";
 import { Pagination } from "../../../types/pagination";
@@ -94,16 +95,7 @@ const UsersTable = () => {
               <td>{user.instagram_handle}</td>
               <td>{user.tiktok_handle}</td>
               <td>
-                {user.joined_at
-                  ? new Date(user.joined_at).toLocaleString("en-GB", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "2-digit",
-                      hour12: true,
-                    })
-                  : null}
+                <FormatDate date={user.joined_at} />
               </td>
             </tr>
           ))}

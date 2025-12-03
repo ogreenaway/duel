@@ -26,10 +26,7 @@ const TablePagination = ({
         <Pagination.Item>{currentPage}</Pagination.Item>
         <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} />
         <Pagination.Last
-          onClick={() => {
-            console.log("owen");
-            setCurrentPage(pagination.totalPages);
-          }}
+          onClick={() => setCurrentPage(pagination.totalPages)}
         />
       </Pagination>
     );

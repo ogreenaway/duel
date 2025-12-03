@@ -5,7 +5,7 @@ import LimitSelector from "../../../components/LimitSelector";
 import { Link } from "react-router-dom";
 import { Pagination } from "../../../types/pagination";
 import TablePagination from "../../../components/Pagination";
-import { Task } from "../../../../../server/src/models/TaskModel";
+import { Task } from "../../../types/TaskModel";
 
 interface GetTasksProps {
   currentPage: number;

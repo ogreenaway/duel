@@ -62,9 +62,10 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 - Add CRUD for tasks, programs, and users
 - add a package.json to the root to make setup easier
-- Social Media handles aren't showing
 
 # Deliberate omissions
 
 - Authentication and security
 - Supporting small screens
+- Using .env files. I have simply hardcoded localhost.
+- Comprehensive error handling and logging
