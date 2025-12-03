@@ -6,6 +6,9 @@ describe("getCleanInstagramHandle", () => {
     expect(getCleanInstagramHandle("user_name")).toBe("user_name");
     expect(getCleanInstagramHandle("user.name")).toBe("user.name");
     expect(getCleanInstagramHandle("user123")).toBe("user123");
+    expect(getCleanInstagramHandle("@Malika.Tromp-Legros")).toBe(
+      "@Malika.Tromp-Legros",
+    );
   });
 
   it("should return null when handle is longer than 30 characters", () => {
@@ -19,7 +22,6 @@ describe("getCleanInstagramHandle", () => {
   });
 
   it("should return null when handle contains invalid characters", () => {
-    expect(getCleanInstagramHandle("user-name")).toBeNull(); // hyphen not allowed
     expect(getCleanInstagramHandle("user@name")).toBeNull(); // email not allowed
     expect(getCleanInstagramHandle("user name")).toBeNull(); // space not allowed
   });

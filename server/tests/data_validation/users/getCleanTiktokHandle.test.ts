@@ -20,7 +20,6 @@ describe("getCleanTiktokHandle", () => {
   });
 
   it("should return null when handle contains invalid characters", () => {
-    expect(getCleanTiktokHandle("user-name")).toBeNull(); // hyphen not allowed
     expect(getCleanTiktokHandle("user@name")).toBeNull(); // email not allowed
     expect(getCleanTiktokHandle("user name")).toBeNull(); // space not allowed
   });

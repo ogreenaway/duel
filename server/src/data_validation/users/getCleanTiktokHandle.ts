@@ -3,9 +3,13 @@ export const getCleanTiktokHandle = (handle: unknown): string | null => {
 
   if (handle.length > 24) return null;
 
-  // Allowable characters: a-z A-Z 0-9 _ .
-  const validCharsRegex = /^[a-zA-Z0-9_.]+$/;
-  if (!validCharsRegex.test(handle)) return null;
+  // Allowable characters: a-z A-Z 0-9 _ . -
+  const validCharsRegex = /^[a-zA-Z0-9_.-]+$/;
+  if (handle.startsWith("@")) {
+    if (!validCharsRegex.test(handle.slice(1))) return null;
+  } else {
+    if (!validCharsRegex.test(handle)) return null;
+  }
 
   // Periods cannot be at the end of the username
   if (handle.endsWith(".")) return null;
