@@ -3,8 +3,8 @@
 This repo contains:
 
 1. A node script to sanitise and normalise the provided data and add it to a MongoDB database
-2. An ExpressJs backend, written in TypeScript, to get the data
-3. A React frontend, also written in TypeScript, to view and analyse the data
+2. An ExpressJs TypeScript backend to get the data
+3. A React TypeScript frontend to view and analyse the data
 
 # How to run locally
 
@@ -29,16 +29,22 @@ I didn't want to leak your data in a public git repository, so you have to add i
 
 ### Step 5: Install backend dependencies
 
-- npm i
+- `cd server`
+- `npm install`
 
 ### Step 6: Run the backend
 
-- npm run dev
-- url: http://localhost:3000/
+- `npm run dev`
+- (Running on http://localhost:5000/)
 
 ### Step 7: Install the frontend dependencies
 
+- `cd client`
+- `npm install`
+
 ### Step 8: Run the frontend
+
+- `npm start`
 
 # Insights about the data
 

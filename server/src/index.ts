@@ -8,11 +8,12 @@ import server from "./server";
     await mongoDb.connect();
     logger.info("Connected to MongoDB");
 
-    server.listen(ENV.Port, (error) => {
+    const PORT = 5000;
+    server.listen(PORT, (error) => {
       if (!!error) {
         logger.err(error.message);
       } else {
-        logger.info("Express server started on port: " + ENV.Port.toString());
+        logger.info("Express server started on port: " + PORT.toString());
       }
     });
 
