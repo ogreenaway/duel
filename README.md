@@ -6,7 +6,13 @@ This repo contains:
 2. An ExpressJs TypeScript backend to get the data
 3. A React TypeScript frontend to view and analyse the data
 
-TODO: add a quick note about the pages
+The app contains the ability to:
+
+- view groups or individual tasks, users and programs
+- the users with the highest likes, comment, shares, and reach
+- the programs with the highest total sales attributed
+- the correlation coefficients between engagement metrics and the total sales attributed to the program
+- a scatter plot of the completed tasks to look for trends and outliers
 
 # How to run locally
 
@@ -49,6 +55,15 @@ I didn't want to leak your data in a public git repository, so you have to add i
 - `npm start`
 
 # Screenshots
+
+![Statistics screen](screenshots/localhost_3000_reports_statistics.png)
+![Programs with the highest total sales](screenshots/localhost_3000_reports_top-programs.png)
+![Users with the highest total sales](screenshots/localhost_3000_reports_top-users.png)
+![View users](screenshots/localhost_3000_users.png)
+![View one user](screenshots/localhost_3000_user.png)
+![View tasks](screenshots/localhost_3000_tasks.png)
+![View one task](<screenshots/localhost_3000_ task.png>)
+![View all programs](screenshots/localhost_3000_programs.png)
 
 # Insights about the data
 
