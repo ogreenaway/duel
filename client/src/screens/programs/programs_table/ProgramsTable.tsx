@@ -1,4 +1,5 @@
 import { Alert, Spinner, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Currency from "../../../components/Currency";
@@ -84,7 +85,9 @@ const ProgramsTable = () => {
         <tbody>
           {programs.map((program) => (
             <tr key={program._id}>
-              <td>{program._id}</td>
+              <td>
+                <Link to={`/programs/${program._id}`}>{program._id}</Link>
+              </td>
               <td>{program.legacy_program_id}</td>
               <td>{program.brand}</td>
               <td>

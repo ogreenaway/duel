@@ -89,7 +89,9 @@ const TasksTable = () => {
         <tbody>
           {tasks.map((task) => (
             <tr key={task._id.toString()}>
-              <td>{task._id.toString()}</td>
+              <td>
+                <Link to={`/tasks/${task._id}`}>{task._id.toString()}</Link>
+              </td>
               {/* <td>{task.legacy_task_id}</td> */}
               <td>{task.platform}</td>
               <td>{task.post_url}</td>

@@ -6,6 +6,7 @@ describe("getCleanTiktokHandle", () => {
     expect(getCleanTiktokHandle("user_name")).toBe("user_name");
     expect(getCleanTiktokHandle("user.name")).toBe("user.name");
     expect(getCleanTiktokHandle("user123")).toBe("user123");
+    expect(getCleanTiktokHandle("@Declan35")).toBe("@Declan35");
   });
 
   it("should return null when handle is longer than 24 characters", () => {

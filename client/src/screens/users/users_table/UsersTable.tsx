@@ -1,4 +1,5 @@
 import { Alert, Spinner, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import LimitSelector from "../../../components/LimitSelector";
@@ -85,7 +86,9 @@ const UsersTable = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user._id}</td>
+              <td>
+                <Link to={`/users/${user._id}`}>{user._id}</Link>
+              </td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.instagram_handle}</td>
