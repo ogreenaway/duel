@@ -86,6 +86,7 @@ const TasksTable = () => {
         <LimitSelector
           currentLimit={currentLimit}
           setCurrentLimit={setCurrentLimit}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </>

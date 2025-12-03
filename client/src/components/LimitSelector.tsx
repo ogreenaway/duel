@@ -3,20 +3,24 @@ import { Form } from "react-bootstrap";
 interface LimitSelectorProps {
   currentLimit: number;
   setCurrentLimit: (limit: number) => void;
+  setCurrentPage: (page: number) => void;
 }
 
 const LimitSelector = ({
   currentLimit,
   setCurrentLimit,
+  setCurrentPage,
 }: LimitSelectorProps) => {
   return (
     <div style={{ minWidth: "150px" }}>
       <Form.Select
         aria-label="Limit select"
         value={currentLimit}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-          setCurrentLimit(Number(event.target.value))
-        }
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+          setCurrentLimit(Number(event.target.value));
+          // Reset the page to 1 when the limit is changed because otherwise it might not exist anymore
+          setCurrentPage(1);
+        }}
       >
         <option value="5">Limit: 5</option>
         <option value="10">Limit: 10</option>
