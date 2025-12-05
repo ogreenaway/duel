@@ -90,3 +90,23 @@ npm start
 - Comprehensive error handling and logging
 - Supporting small screens
 - Add CRUD for tasks, programs, and users
+
+# Future improvements and scaling
+
+## Scaling
+
+- Add performance logs for all endpoints so we know when scaling is needed. Also measure the time it takes the frontend from initial GET request to showing meaningful data
+- Use express clusting to use all the cores and use virtical scaling by renting a bigger vitual machine
+- Add some caching layers, the main one being Redis
+- Scale horizontally with multiple instances of the application and a load balancer; something like Nginx
+- Use shards to scale MongoDB
+- Consider using an event-driven architecture, for example using Kafka
+- Once at a huge scale, consider using Docker containers and an orchastration layer like Kubernetes
+
+## Things I ran out of time for
+
+- I just did the simplest thing of making API calls directly from the React components. Normally these API calls would live in separate files and use something like React Query for caching
+- Add Jest unit tests on the FE using React Test Library. I added some basic tests on BE as a simple example
+- Add Selenium acceptance tests
+- Add a continuous deployment pipeline
+- Add schema validation to MongoDB
